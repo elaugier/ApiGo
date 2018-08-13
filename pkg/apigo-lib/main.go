@@ -1,22 +1,18 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"os"
-)
-
+//export dbConfig
 type dbConfig struct {
 	AdminDatabase    string `json:"AdminDatabase"`
 	ConnectionString string `json:"ConnectionString"`
 	Driver           string `json:"Driver"`
 }
 
+//export kafkaProducer
 type kafkaProducer struct {
 	BootstrapServers string `json:"Bootstrap.servers"`
 }
 
+//export configFileEngine
 type configFileEngine struct {
 	AccountingDatabase              dbConfig      `json:"AccountingDatabase"`
 	Bindings                        string        `json:"Bindings"`
@@ -31,15 +27,4 @@ type configFileEngine struct {
 	Secure                          bool          `json:"Secure"`
 }
 
-func main() {
-	jsonFile, err := os.Open("config/default.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("Successfully Opened config/default.json")
-	defer jsonFile.Close()
-	byteValue, _ := ioutil.ReadAll(jsonFile)
-	var config configFileEngine
-	json.Unmarshal(byteValue, &config)
-
-}
+func main() {}

@@ -1,0 +1,19 @@
+{
+    "AccountingDatabase": {
+      "AdminDatabase": "postgres",
+      "ConnectionString": "Host=192.168.144.19;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword;SSL Mode=Require;Trust Server Certificate=true",
+      "Driver": "postgres"
+    },
+    "JobsDatabase": {
+      "AdminDatabase": "postgres",
+      "ConnectionString": "Host=192.168.144.19;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword;SSL Mode=Require;Trust Server Certificate=true",
+      "Driver": "postgres"
+    },
+    "KafkaConsumer": {
+      "Bootstrap.servers": "192.168.144.19:9092/kafka",
+      "Group.id": "winworkers"
+    },
+    "ScriptsPath": "config\\scripts",
+    "WorkerTopic": "winworkersTopic",
+    "OnMessageTimeout": "10000"
+  }
