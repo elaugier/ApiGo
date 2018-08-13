@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/elaugier/ApiGo/pkg/apigolib"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -30,4 +31,11 @@ func main() {
 	var config apigolib.ConfigFileEngine
 	json.Unmarshal(byteValue, &config)
 
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080
 }
