@@ -1,0 +1,23 @@
+{
+    "AccountingDatabase": {
+      "AdminDatabase": "postgres",
+      "ConnectionString": "Host=192.168.144.19;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword;SSL Mode=Require;Trust Server Certificate=true",
+      "Driver": "postgres"
+    },
+    "Bindings": "0.0.0.0:1203",
+    "CertPath": "",
+    "CertPwd": "",
+    "JobsDatabase": {
+      "AdminDatabase": "postgres",
+      "ConnectionString": "Host=192.168.144.19;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword;SSL Mode=Require;Trust Server Certificate=true",
+      "Driver": "postgres"
+    },
+    "KafkaProducer": {
+      "Bootstrap.servers": "192.168.144.19:9092/kafka"
+    },
+    "MaxConcurrentConnections": "0",
+    "MaxConcurrentUpgradeConnections": "0",
+    "MaxRequestBodySize": "338657280",
+    "RoutesConfigPath": "config/routes",
+    "Secure": "false"
+  }
