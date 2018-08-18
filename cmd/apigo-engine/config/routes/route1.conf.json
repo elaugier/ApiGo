@@ -1,0 +1,23 @@
+{
+    "Name": "Route1",
+    "Cmd": {
+      "Name": "Command1",
+      "Type": "Powershell",
+      "PSModule": "PSModule",
+      "Params": [
+        {
+          "Name": "Argument1",
+          "Type": "String",
+          "Mandatory": "True",
+          "In": "body"
+        }
+      ]
+    },
+    "Route": "/route1",
+    "Method": "POST",
+    "JobType": "synchronous",
+    "Topic": "topic1",
+    "Timeout": "15000",
+    "AddRequestIdParam": "True"
+  }
+  

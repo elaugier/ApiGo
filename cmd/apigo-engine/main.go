@@ -12,6 +12,7 @@ import (
 	"github.com/kardianos/osext"
 
 	"github.com/elaugier/ApiGo/pkg/apigoconfig"
+	"github.com/elaugier/ApiGo/pkg/apigorouter"
 
 	"github.com/gin-gonic/gin"
 )
@@ -65,20 +66,17 @@ func main() {
 	log.Printf("typeof => %s", reflect.TypeOf(config.AllSettings()))
 
 	if config.GetBool("Debug") {
-		log.Println("enable gin TestMode")
-		gin.SetMode(gin.TestMode)
+		log.Println("enable gin DebugMode")
+		gin.SetMode(gin.DebugMode)
 	} else {
 		log.Println("enable gin ReleaseMode")
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	r := gin.Default()
-
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r, err := apigorouter.Get(config.GetString("RoutesConfigPath"))
+	if err != nil {
+		log.Panicf("Loading routes : FAILED! => %v", err)
+	}
 
 	r.Run(config.GetString("Bindings"))
 }

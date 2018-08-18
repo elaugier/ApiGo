@@ -20,7 +20,8 @@ func Get() (*viper.Viper, error) {
 	v.SetDefault("JobsDatabase.Driver", "postgres")
 	v.SetDefault("JobsDatabase.ConnectionString", "Host=localhost;Port=5432;Database=agdatabase;Username=aguser;Password=agpassword;SSL Mode=Require;Trust Server Certificate=true")
 	v.SetDefault("Bindings", "0.0.0.0:1203")
-	v.SetDefault("Debug", false)
+	v.SetDefault("RoutesConfigPath", "config/routes")
+	v.SetDefault("Debug", true)
 
 	v.SetConfigName("default")
 	v.SetConfigType("json")
