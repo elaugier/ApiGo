@@ -1,8 +1,6 @@
 package apigorouter
 
 import (
-	"bytes"
-	"encoding/gob"
 	"log"
 	"path/filepath"
 	"strings"
@@ -21,18 +19,7 @@ import (
 func CurrentRoute(id int, route *viper.Viper) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set("id", id)
-		var data bytes.Buffer
-		enc := gob.NewEncoder(&data)
-		err := enc.Encode(route)
-		if err != nil {
-			log.Println("Error during the packing route data")
-			c.JSON(500, gin.H{
-				"msg": "Error during the packing route data",
-			})
-		} else {
-			c.Set("route", data)
-			c.Next()
-		}
+		c.Next()
 	}
 }
 
@@ -67,13 +54,13 @@ func Get(pathConfig string) (*gin.Engine, error) {
 		log.Printf("error on recursive search for *.conf.json in folder : %s => %v", pathConfig, err)
 	}
 
-	routesConfigs := make(map[int]*viper.Viper)
+	apigohandlers.RoutesConfigs = make(map[int]*viper.Viper)
 	for i, f := range filesConf {
-		routesConfigs[i] = apigoconfig.GetRouteConfig(f)
+		apigohandlers.RoutesConfigs[i] = apigoconfig.GetRouteConfig(f)
 		log.Printf("(%d ==> %s", i, f)
 	}
 
-	for index, route := range routesConfigs {
+	for index, route := range apigohandlers.RoutesConfigs {
 		routeName := route.GetString("Name")
 		routePath := strings.ToLower(route.GetString("Route"))
 		jobType := strings.ToLower(route.GetString("JobType"))
