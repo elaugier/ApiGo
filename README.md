@@ -15,7 +15,7 @@
 
 ApiGo is an API engine which allow to build quickly a REST API without development. If you have already some scripts written in Powershell, Python, ... and you need to expose these through an web API, ApiGo may be your solution.
 
-![Overview](https://github.com/elaugier/ApiGo/blob/master/docs/overview.png)
+![Overview](https://github.com/elaugier/ApiGo/blob/master/docs/apigo-overview.png)
 
 
 ## Implementation
