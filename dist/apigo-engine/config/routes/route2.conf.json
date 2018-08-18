@@ -14,8 +14,8 @@
       ]
     },
     "Route": "/route2",
-    "Method": "GET",
-    "JobType": "synchronous",
+    "Method": "POST",
+    "JobType": "asynchronous",
     "Topic": "topic1",
     "Timeout": "15000",
     "AddRequestIdParam": "True"
