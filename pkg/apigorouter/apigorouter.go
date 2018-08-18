@@ -1,9 +1,12 @@
 package apigorouter
 
 import (
+	"encoding/binary"
 	"log"
 	"path/filepath"
 	"strings"
+
+	"gopkg.in/restruct.v1"
 
 	"github.com/elaugier/ApiGo/pkg/apigohandlers"
 
@@ -19,8 +22,16 @@ import (
 func CurrentRoute(id int, route *viper.Viper) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set("id", id)
-		c.Set("route", route)
-		c.Next()
+		data, err := restruct.Pack(binary.LittleEndian, route)
+		if err != nil {
+			log.Println("Error during the packing route data")
+			c.JSON(500, gin.H{
+				"msg": "Error during the packing route data",
+			})
+		} else {
+			c.Set("route", data)
+			c.Next()
+		}
 	}
 }
 

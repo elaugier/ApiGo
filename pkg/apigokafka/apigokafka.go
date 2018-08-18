@@ -1,5 +1,5 @@
 package apigokafka
 
-func run() {
+func Send() {
 
 }
