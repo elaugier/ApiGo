@@ -1,6 +1,8 @@
 package apigoconfig
 
 import (
+	"bytes"
+	"io/ioutil"
 	"log"
 
 	"github.com/kardianos/osext"
@@ -34,4 +36,18 @@ func Get() (*viper.Viper, error) {
 		log.Printf("couldn't read the configuration from file: \n%v\n", err)
 	}
 	return v, nil
+}
+
+//GetRouteConfig ...
+func GetRouteConfig(pathFile string) *viper.Viper {
+	v := viper.New()
+	v.SetConfigType("json")
+	log.Printf("Read file '%s'", pathFile)
+	f, err := ioutil.ReadFile(pathFile)
+	log.Printf("Load configuration from content of file '%s'", pathFile)
+	err = v.ReadConfig(bytes.NewBuffer(f))
+	if err != nil {
+		log.Printf("couldn't read the configuration from file: \n%v\n", err)
+	}
+	return v
 }
