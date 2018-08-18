@@ -99,7 +99,7 @@ At root, there is a file _default.json_. This is the main configuration.
     "Driver": "postgres"
   },
   "KafkaProducer": {
-    "Bootstrap.servers": "localhost:9092"
+    "BootstrapServers": "localhost:9092"
   },
   "MaxConcurrentConnections": "0",
   "MaxConcurrentUpgradeConnections": "0",
@@ -193,9 +193,9 @@ At root, there is a file _default.json_. This is the main configuration.
     "Driver": "postgres"
   },
   "KafkaConsumer": {
-    "Bootstrap.servers": "",
+    "BootstrapServers": "",
     "Debug": "",
-    "Group.id": "winworkers"
+    "GroupId": "winworkers"
   },
   "ScriptsPath": "config\\scripts",
   "WorkerTopic": "winworkersTopic",

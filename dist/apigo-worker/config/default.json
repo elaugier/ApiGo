@@ -10,8 +10,8 @@
       "Driver": "postgres"
     },
     "KafkaConsumer": {
-      "Bootstrap.servers": "192.168.144.19:9092/kafka",
-      "Group.id": "winworkers"
+      "BootstrapServers": "192.168.144.19:9092/kafka",
+      "GroupId": "winworkers"
     },
     "ScriptsPath": "config\\scripts",
     "WorkerTopic": "winworkersTopic",

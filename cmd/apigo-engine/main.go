@@ -4,7 +4,6 @@ import (
 	"io"
 	"log"
 	"os"
-	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -16,19 +15,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-
-/* func logConfig(config map[string]interface, sep string){
-	for key, value := range config {
-		typeValue := reflect.TypeOf(value)
-		if(typeValue=="map[string]"){
-			sep += " "
-			logConfig(value, sep)
-		}
-		else {
-			log.Printf("%s => %s", key, value)
-		}
-	}
-} */
 
 func main() {
 
@@ -61,9 +47,6 @@ func main() {
 	}
 	multi := io.MultiWriter(f, os.Stdout)
 	log.SetOutput(multi)
-
-	// TODO: Output some parameters from read config
-	log.Printf("typeof => %s", reflect.TypeOf(config.AllSettings()))
 
 	if config.GetBool("Debug") {
 		log.Println("enable gin DebugMode")
