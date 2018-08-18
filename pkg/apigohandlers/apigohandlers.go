@@ -1,7 +1,9 @@
 package apigohandlers
 
 import (
+	"bytes"
 	"encoding/binary"
+	"encoding/gob"
 	"fmt"
 	"log"
 
@@ -29,10 +31,12 @@ func SynchronousJob(c *gin.Context) {
 
 //AsynchronousJob ...
 func AsynchronousJob(c *gin.Context) {
-	buf, exists := c.Get("route")
-	if exists {
-		var cr viper.Viper
-		restruct.Unpack(buf.([]byte), binary.LittleEndian, &cr)
+	buf, _ := c.Get("route")
+	data := buf.(bytes.Buffer)
+	dec := gob.NewDecoder(&data)
+	var cr viper.Viper
+	err := dec.Decode(&cr)
+	if err == nil {
 		for i, v := range cr.AllSettings() {
 			log.Printf("%s : %v", i, v)
 		}
