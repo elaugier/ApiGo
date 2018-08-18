@@ -254,8 +254,8 @@ Open an issue first to discuss potential changes/additions.
 
 GNU General Public License v3.0
 
-![Egen Guru logo](https://github.com/elaugier/ApiGo/blob/master/docs/g887.png)
-[Egen Guru](https://egen.guru/)
+[![Egen Guru logo](https://github.com/elaugier/ApiGo/blob/master/docs/g887.png)](https://egen.guru/)
+
 contact : support@egen.guru
 
 **[Back to top](#table-of-contents)**
