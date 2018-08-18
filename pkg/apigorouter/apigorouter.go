@@ -15,6 +15,15 @@ import (
 	"github.com/kardianos/osext"
 )
 
+//CurrentRoute ...
+func CurrentRoute(id int, route *viper.Viper) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Set("id", id)
+		c.Set("route", route)
+		c.Next()
+	}
+}
+
 //Get ...
 func Get(pathConfig string) (*gin.Engine, error) {
 
@@ -52,7 +61,7 @@ func Get(pathConfig string) (*gin.Engine, error) {
 		log.Printf("(%d ==> %s", i, f)
 	}
 
-	for _, route := range routesConfigs {
+	for index, route := range routesConfigs {
 		routeName := route.GetString("Name")
 		routePath := strings.ToLower(route.GetString("Route"))
 		jobType := strings.ToLower(route.GetString("JobType"))
@@ -62,19 +71,19 @@ func Get(pathConfig string) (*gin.Engine, error) {
 
 			switch method {
 			case "get":
-				r.GET(routePath, apigohandlers.SynchronousJob)
+				r.GET(routePath, CurrentRoute(index, route), apigohandlers.SynchronousJob)
 
 			case "post":
-				r.POST(routePath, apigohandlers.SynchronousJob)
+				r.POST(routePath, CurrentRoute(index, route), apigohandlers.SynchronousJob)
 
 			case "put":
-				r.PUT(routePath, apigohandlers.SynchronousJob)
+				r.PUT(routePath, CurrentRoute(index, route), apigohandlers.SynchronousJob)
 
 			case "patch":
-				r.PATCH(routePath, apigohandlers.SynchronousJob)
+				r.PATCH(routePath, CurrentRoute(index, route), apigohandlers.SynchronousJob)
 
 			case "delete":
-				r.DELETE(routePath, apigohandlers.SynchronousJob)
+				r.DELETE(routePath, CurrentRoute(index, route), apigohandlers.SynchronousJob)
 
 			default:
 				log.Printf("Unknown method or invalid method for route '%s'", routeName)
@@ -83,19 +92,19 @@ func Get(pathConfig string) (*gin.Engine, error) {
 		case "asynchronous":
 			switch method {
 			case "get":
-				r.GET(routePath, apigohandlers.AsynchronousJob)
+				r.GET(routePath, CurrentRoute(index, route), apigohandlers.AsynchronousJob)
 
 			case "post":
-				r.POST(routePath, apigohandlers.AsynchronousJob)
+				r.POST(routePath, CurrentRoute(index, route), apigohandlers.AsynchronousJob)
 
 			case "put":
-				r.PUT(routePath, apigohandlers.AsynchronousJob)
+				r.PUT(routePath, CurrentRoute(index, route), apigohandlers.AsynchronousJob)
 
 			case "patch":
-				r.PATCH(routePath, apigohandlers.AsynchronousJob)
+				r.PATCH(routePath, CurrentRoute(index, route), apigohandlers.AsynchronousJob)
 
 			case "delete":
-				r.DELETE(routePath, apigohandlers.AsynchronousJob)
+				r.DELETE(routePath, CurrentRoute(index, route), apigohandlers.AsynchronousJob)
 
 			default:
 				log.Printf("Unknown method or invalid method for route '%s'", routeName)
