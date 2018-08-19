@@ -243,8 +243,119 @@ The engine return result as 'application/json' and the standard response have th
 
 **[Back to top](#table-of-contents)**
 
-### Powershell CmdLets
+### Powershell CmdLets and Modules
 
+To use Powershell with ApiGo, you must use Powershell Module (.psm1), not directly a script (.ps1).  The main interest of the module is to limit the number of scripts to deploy on the workers by grouping the cmdlets in a single module file.
+
+The following code is an minimal example of Powershell module.
+
+```powershell
+
+# ApiGo (https://github.com/eGenGuru/ApiGo)
+# -----------------------------------------
+# script sample for Powershell
+
+function HelloWorld {
+    param (
+    )
+    @{ "message" = "Hello World!" } | ConvertTo-Json
+}
+
+Export-ModuleMember -Function HelloWorld
+
+```
+
+To make a PS Module available for ApiGo, you just have to copy your file under the folder __psmodules__ in the scripts directory (watch the worker configuration file to know it)
+
+**[Back to top](#table-of-contents)**
+
+### Python scripts and virtual environments
+
+To use Python scripts, you need to configure at least one virtual environment. 
+
+1. Open a shell under the folder __PyEnvs__ in the scripts directory (watch the worker configuration file to know it)
+1. Create a virtual environment with the following command :
+~~~~
+        python -m venv [VirtualEnvName]
+~~~~
+1. To make a Python script available for ApiGo, you just have to copy your file under the folder __python-scripts__ in the scripts directory
+
+The following code is an minimal example of Python script.
+
+```python
+
+# ApiGo (https://github.com/eGenGuru/ApiGo)
+# -----------------------------------------
+# script sample for Python
+
+import json
+
+t = {'message':'Hello World'}
+print(json.dumps(t))
+
+```
+
+**[Back to top](#table-of-contents)**
+
+### Perl
+
+The following code is an minimal example of Perl script.
+
+```perl
+
+# ApiGo (https://github.com/eGenGuru/ApiGo)
+# -----------------------------------------
+# script sample for Perl
+
+use JSON;
+
+my %msg = ('message' => 'Hello World!');
+my $json = encode_json \%msg;
+print $json
+
+```
+
+**[Back to top](#table-of-contents)**
+
+### Ruby
+
+The following code is an minimal example of Ruby script.
+
+```ruby
+
+# ApiGo (https://github.com/eGenGuru/ApiGo)
+# -----------------------------------------
+# script sample for Ruby
+
+require 'json/ext'
+
+t = {:message => "Hello World!"}
+puts t.to_json
+
+```
+
+**[Back to top](#table-of-contents)**
+
+### PHP
+
+The following code is an minimal example of PHP script.
+
+```php
+
+<?php
+/**
+ * ApiGo (https://github.com/eGenGuru/ApiGo)
+ * -----------------------------------------
+ * 
+ * script sample for PHP
+ */
+$t = [
+    "message" => "Hello World!"
+];
+
+echo json_encode($t);
+
+```
 
 
 **[Back to top](#table-of-contents)**
