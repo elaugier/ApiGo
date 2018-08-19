@@ -9,6 +9,7 @@
 1. [Implementation](#implementation)
 1. [Installation](#installation)
 1. [Usage](#usage)
+1. [Security](#security)
 1. [API](#api)
 1. [Contributing](#contributing)
 1. [License](#license)
