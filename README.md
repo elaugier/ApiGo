@@ -7,9 +7,9 @@
 
 1. [What is ApiGo?](#what-is-coreapi)
 1. [Implementation](#implementation)
-1. [Installation](#Installation)
-1. [Usage](#Usage)
-1. [API](#API)
+1. [Installation](#installation)
+1. [Usage](#usage)
+1. [API](#api)
 1. [Contributing](#contributing)
 1. [License](#license)
 
