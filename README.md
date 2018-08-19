@@ -52,7 +52,6 @@ There are some components in ApiGo :
 	- MySQL
 	- Sql Server
 	- Sqlite
-	- FirebirdSql
 
 # Installation
 
