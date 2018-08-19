@@ -251,7 +251,7 @@ The following code is an minimal example of Powershell module.
 
 ```powershell
 
-# ApiGo (https://github.com/eGenGuru/ApiGo)
+# ApiGo (https://github.com/elaugier/ApiGo)
 # -----------------------------------------
 # script sample for Powershell
 
@@ -284,7 +284,7 @@ The following code is an minimal example of Python script.
 
 ```python
 
-# ApiGo (https://github.com/eGenGuru/ApiGo)
+# ApiGo (https://github.com/elaugier/ApiGo)
 # -----------------------------------------
 # script sample for Python
 
@@ -303,7 +303,7 @@ The following code is an minimal example of Perl script.
 
 ```perl
 
-# ApiGo (https://github.com/eGenGuru/ApiGo)
+# ApiGo (https://github.com/elaugier/ApiGo)
 # -----------------------------------------
 # script sample for Perl
 
@@ -323,7 +323,7 @@ The following code is an minimal example of Ruby script.
 
 ```ruby
 
-# ApiGo (https://github.com/eGenGuru/ApiGo)
+# ApiGo (https://github.com/elaugier/ApiGo)
 # -----------------------------------------
 # script sample for Ruby
 
@@ -344,7 +344,7 @@ The following code is an minimal example of PHP script.
 
 <?php
 /**
- * ApiGo (https://github.com/eGenGuru/ApiGo)
+ * ApiGo (https://github.com/elaugier/ApiGo)
  * -----------------------------------------
  * 
  * script sample for PHP

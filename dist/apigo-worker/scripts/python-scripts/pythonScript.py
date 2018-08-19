@@ -1,4 +1,4 @@
-# ApiGo (https://github.com/eGenGuru/ApiGo)
+# ApiGo (https://github.com/elaugier/ApiGo)
 # -----------------------------------------
 # script sample for Python
 
