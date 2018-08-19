@@ -365,6 +365,10 @@ echo json_encode($t);
 
 **[Back to top](#table-of-contents)**
 
+# Security
+
+ApiGo only supports the Key API for the moment. It will evolve in the future. 
+
 # API
 
 **[Back to top](#table-of-contents)**
