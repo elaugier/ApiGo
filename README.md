@@ -7,18 +7,21 @@
 
 1. [What is ApiGo?](#what-is-coreapi)
 1. [Implementation](#implementation)
+1. [Installation](#Installation)
+1. [Usage](#Usage)
+1. [API](#API)
 1. [Contributing](#contributing)
 1. [License](#license)
 
 
-## What is ApiGo?
+# What is ApiGo?
 
 ApiGo is an API engine which allow to build quickly a REST API without development. If you have already some scripts written in Powershell, Python, ... and you need to expose these through an web API, ApiGo may be your solution.
 
 ![Overview](https://github.com/elaugier/ApiGo/blob/master/docs/apigo-overview.png)
 
 
-### Script Languages Compliance
+## Script Languages Compliance
 
 - Powershell
 - Python
@@ -26,9 +29,9 @@ ApiGo is an API engine which allow to build quickly a REST API without developme
 - Php
 - Ruby
 
-## Implementation
+# Implementation
 
-### Components
+## Components
 
 There are some components in ApiGo :
 
@@ -37,7 +40,7 @@ There are some components in ApiGo :
 * a Message Broker : Apache Kafka
 * a Database (Postgresql, MySQL, etc.)
 
-### Dependencies
+## Dependencies
 
 * Messaging System
 
@@ -51,11 +54,11 @@ There are some components in ApiGo :
 	- Sqlite
 	- FirebirdSql
 
-## Installation
+# Installation
 
 Before install the components, you must build the project.
 
-### Build and publish ApiGo
+## Build and publish ApiGo
 
 Open a command line in __ApiGo__ git root folder and type the following command : 
 
@@ -69,13 +72,13 @@ Windows : build.cmd
 
 **[Back to top](#table-of-contents)**
 
-### ApiGo installation
+## ApiGo installation
 
 TBD
 
 **[Back to top](#table-of-contents)**
 
-### Setup ApiGo as windows service
+## Setup ApiGo as windows service
 
 To setup coreApi as windows service, we recommand to use [NSSM](https://nssm.cc/download)
 
@@ -83,9 +86,9 @@ Follow the instructions written on the following url [https://nssm.cc/usage](htt
 
 **[Back to top](#table-of-contents)**
 
-## Usage
+# Usage
 
-### Engine Configuration
+## Engine Configuration
 
 All configurations are stored in the folder __config__.
 
@@ -182,7 +185,7 @@ For Python script, you must define a new attribute "PyEnv" to allow the worker a
 
 **[Back to top](#table-of-contents)**
 
-### Worker Configuration
+## Worker Configuration
 
 All configurations are stored in the folder __config__.
 
@@ -213,9 +216,9 @@ At root, there is a file _default.json_. This is the main configuration.
 
 **[Back to top](#table-of-contents)**
 
-### Worker scripts installation
+## Worker scripts installation
 
-#### Overview
+### Overview
 
 the ApiGo worker can use any command, you can launch from the OS shell. But you have to know how worker returns 
 the result to the engine.
@@ -240,15 +243,13 @@ The engine return result as 'application/json' and the standard response have th
 
 **[Back to top](#table-of-contents)**
 
-#### Powershell CmdLets
+### Powershell CmdLets
 
 
 
 **[Back to top](#table-of-contents)**
 
-## API
-
-## Payload
+# API
 
 **[Back to top](#table-of-contents)**
 
