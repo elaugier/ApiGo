@@ -18,6 +18,14 @@ ApiGo is an API engine which allow to build quickly a REST API without developme
 ![Overview](https://github.com/elaugier/ApiGo/blob/master/docs/apigo-overview.png)
 
 
+### Script Languages Compliance
+
+- Powershell
+- Python
+- Perl
+- Php
+- Ruby
+
 ## Implementation
 
 ### Components
