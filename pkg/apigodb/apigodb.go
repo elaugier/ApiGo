@@ -1,7 +1,10 @@
 package apigodb
 
 import (
+	"log"
 	"time"
+
+	"github.com/spf13/viper"
 
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
@@ -65,11 +68,16 @@ func (User) TableName() string {
 	return "users"
 }
 
-//InitDb ...
-func InitDb() {
+//Connect ...
+func Connect(config viper.Viper) *gorm.DB {
 	db, err := gorm.Open("sqlite3", "test.db")
 	if err != nil {
-		panic("failed to connect database")
+		log.Fatalln("failed to connect database")
 	}
-	defer db.Close()
+	return db
+}
+
+//InitDb ...
+func InitDb(db *gorm.DB) {
+
 }

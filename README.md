@@ -23,11 +23,11 @@ ApiGo is an API engine which allow to build quickly a REST API without developme
 
 ## Script Languages Compliance
 
-- Powershell
-- Python
-- Perl
-- Php
-- Ruby
+- [Powershell](https://docs.microsoft.com/powershell/)
+- [Python](https://www.python.org/)
+- [Perl](https://www.perl.org/)
+- [Php](http://php.net/)
+- [Ruby](https://www.ruby-lang.org/)
 
 # Implementation
 
@@ -298,6 +298,8 @@ print(json.dumps(t))
 
 ### Perl
 
+To make a Perl script available for ApiGo, you just have to copy your file under the folder __perl-scripts__ in the scripts directory (watch the worker configuration file to know it)
+
 The following code is an minimal example of Perl script.
 
 ```perl
@@ -318,6 +320,8 @@ print $json
 
 ### Ruby
 
+To make a Ruby script available for ApiGo, you just have to copy your file under the folder __ruby-scripts__ in the scripts directory (watch the worker configuration file to know it)
+
 The following code is an minimal example of Ruby script.
 
 ```ruby
@@ -336,6 +340,8 @@ puts t.to_json
 **[Back to top](#table-of-contents)**
 
 ### PHP
+
+To make a PHP script available for ApiGo, you just have to copy your file under the folder __php-scripts__ in the scripts directory (watch the worker configuration file to know it)
 
 The following code is an minimal example of PHP script.
 
