@@ -1,1 +1,3 @@
 dist/* linguist-vendored
+librdkafka.redist.0.11.5/* linguist-vendored
+librdkafka/* linguist-vendored
