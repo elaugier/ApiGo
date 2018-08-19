@@ -26,3 +26,13 @@ type ConfigFileEngine struct {
 	RoutesConfigPath                string        `json:"RoutesConfigPath"`
 	Secure                          bool          `json:"Secure"`
 }
+
+//JsonCmd ...
+type JsonCmd struct {
+	Uuid     string            `json:"Uuid`
+	Name     string            `json:"Name"`
+	Type     string            `json:"Type"`
+	PSModule string            `json:"PSModule"`
+	PyEnv    string            `json:"PyEnv"`
+	Args     map[string]string `json:"Args"`
+}

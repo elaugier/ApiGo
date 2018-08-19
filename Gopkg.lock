@@ -2,6 +2,22 @@
 
 
 [[projects]]
+  digest = "1:2aaf2cc045d0219bba79655e4df795b973168c310574669cb75786684f7287d3"
+  name = "github.com/bmatcuk/doublestar"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "85a78806aa1b4707d1dbace9be592cf1ece91ab3"
+  version = "v1.1.1"
+
+[[projects]]
+  digest = "1:a878821c51a2390c0c958d179e7e19ec42cf55a9cce6d4bdbc61d7421b209014"
+  name = "github.com/confluentinc/confluent-kafka-go"
+  packages = ["kafka"]
+  pruneopts = "UT"
+  revision = "5e4d04e05fc319ce5996a867aafef29059f26862"
+  version = "v0.11.4"
+
+[[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
   name = "github.com/fsnotify/fsnotify"
   packages = ["."]
@@ -215,6 +231,8 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/bmatcuk/doublestar",
+    "github.com/confluentinc/confluent-kafka-go/kafka",
     "github.com/gin-gonic/gin",
     "github.com/kardianos/osext",
     "github.com/spf13/viper",
