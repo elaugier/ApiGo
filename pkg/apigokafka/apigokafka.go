@@ -24,7 +24,16 @@ func (p producer) InitConnection(config viper.Viper) {
 	return
 }
 
-//Send ...
-func (producer) Send(msg string) {
+//CloseConnection ...
+func (p producer) CloseConnection() {
+	p.P.Close()
+}
 
+//Send ...
+func (p producer) Send(msg string, topic string) {
+	p.P.Produce(&kafka.Message{
+		TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
+		Value:          []byte(msg),
+	}, nil)
+	p.P.Flush(10000)
 }
