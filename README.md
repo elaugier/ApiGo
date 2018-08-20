@@ -1,6 +1,6 @@
 
 <p align="center">
-<img style="width:30%;" src="https://github.com/elaugier/ApiGo/blob/master/apigo-logo.png?raw=true"/>
+<img src="https://github.com/elaugier/ApiGo/blob/master/apigo-logo-180.png?raw=true"/>
 </p>
 
 ## Table of Contents
