@@ -3,6 +3,7 @@ package apigorouter
 import (
 	"log"
 	"path/filepath"
+	"reflect"
 	"strings"
 
 	"github.com/elaugier/ApiGo/pkg/apigohandlers"
@@ -56,7 +57,14 @@ func Get(pathConfig string) (*gin.Engine, error) {
 
 	apigohandlers.RoutesConfigs = make(map[int]*viper.Viper)
 	for i, f := range filesConf {
-		apigohandlers.RoutesConfigs[i] = apigoconfig.GetRouteConfig(f)
+		c := apigoconfig.GetRouteConfig(f)
+		log.Printf("%v", c.Get("Cmd.Params"))
+		g := c.GetStringMapStringSlice("Cmd.Params")
+		log.Printf("type : %s", reflect.TypeOf(g))
+		for k1, v1 := range g {
+			log.Printf("%s => %s", k1, v1)
+		}
+		apigohandlers.RoutesConfigs[i] = c
 		log.Printf("(%d ==> %s", i, f)
 	}
 

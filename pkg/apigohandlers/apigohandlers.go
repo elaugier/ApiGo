@@ -37,7 +37,16 @@ func SynchronousJob(c *gin.Context) {
 func AsynchronousJob(c *gin.Context) {
 	buf, _ := c.Get("id")
 	id := buf.(int)
+
+	currentRoute := RoutesConfigs[id].GetString("Name")
+
+	expectedParams := RoutesConfigs[id].GetStringMapString("Cmd.Params")
+
+	for p, v := range expectedParams {
+		log.Printf("param %s => %s", p, v)
+	}
+
 	c.JSON(200, gin.H{
-		"msg": fmt.Sprintf("%s", RoutesConfigs[id].GetString("Name")),
+		"msg": fmt.Sprintf("%s", currentRoute),
 	})
 }

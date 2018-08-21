@@ -10,6 +10,12 @@
           "Type": "String",
           "Mandatory": "True",
           "In": "body"
+        },
+        {
+          "Name": "Argument2",
+          "Type": "String",
+          "Mandatory": "False",
+          "In": "body"
         }
       ]
     },
