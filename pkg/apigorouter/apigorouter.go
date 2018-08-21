@@ -59,6 +59,7 @@ func Get(pathConfig string) (*gin.Engine, error) {
 	for i, f := range filesConf {
 		c := apigoconfig.GetRouteConfig(f)
 		log.Printf("%v", c.Get("Cmd.Params"))
+		//https://github.com/spf13/viper/issues/196
 		g := c.GetStringMapStringSlice("Cmd.Params")
 		log.Printf("type : %s", reflect.TypeOf(g))
 		for k1, v1 := range g {
