@@ -1,0 +1,29 @@
+{
+    "Name": "Hello World Powershell",
+    "Cmd": {
+      "Name": "HelloWorld",
+      "Type": "Powershell",
+      "PSModule": "powershellScript",
+      "Params": [
+        {
+          "Name": "id",
+          "Type": "String",
+          "Mandatory": "True",
+          "In": "uri"
+        },
+        {
+          "Name": "Argument2",
+          "Type": "String",
+          "Mandatory": "False",
+          "In": "querystring"
+        }
+      ]
+    },
+    "Route": "/powershell/helloworld/{id}",
+    "Method": "GET",
+    "JobType": "synchronous",
+    "Topic": "topic1",
+    "Timeout": "15000",
+    "AddRequestIDParam": "True"
+  }
+  

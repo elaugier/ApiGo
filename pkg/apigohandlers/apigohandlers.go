@@ -59,7 +59,23 @@ type Parameter struct {
 	In        string `json:"In"`
 }
 
+//Cmd ...
+type Cmd struct {
+	Name     string      `json:"Name"`
+	Type     string      `json:"Type"`
+	PSModule string      `json:"PSModule"`
+	PyVenv   string      `json:"PyVenv"`
+	Params   []Parameter `json:"Params"`
+}
+
 //RouteConfig ...
 type RouteConfig struct {
-	Name string `json:"Name"`
+	Name              string `json:"Name"`
+	Cmd               Cmd    `json:"Cmd"`
+	Route             string `json:"Route"`
+	Method            string `json:"Method"`
+	JobType           string `json:"JobType"`
+	Topic             string `json:"Topic"`
+	Timeout           string `json:"Timeout"`
+	AddRequestIDParam string `json:"AddRequestIDParam"`
 }

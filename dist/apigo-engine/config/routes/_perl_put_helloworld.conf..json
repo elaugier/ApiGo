@@ -1,0 +1,27 @@
+{
+    "Name": "Hello World Python",
+    "Cmd": {
+      "Name": "HelloWorld",
+      "Type": "Perl",
+      "Params": [
+        {
+          "Name": "id",
+          "Type": "String",
+          "Mandatory": "True",
+          "In": "uri"
+        },
+        {
+          "Name": "Argument2",
+          "Type": "String",
+          "Mandatory": "False",
+          "In": "body"
+        }
+      ]
+    },
+    "Route": "/perl/helloworld/{id}",
+    "Method": "PUT",
+    "JobType": "asynchronous",
+    "Topic": "topic1",
+    "Timeout": "15000",
+    "AddRequestIDParam": "True"
+  }

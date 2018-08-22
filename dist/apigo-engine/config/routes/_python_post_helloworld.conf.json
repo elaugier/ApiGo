@@ -1,0 +1,28 @@
+{
+    "Name": "Hello World Python",
+    "Cmd": {
+      "Name": "HelloWorld",
+      "Type": "Python",
+      "PyVenv": "venv1",
+      "Params": [
+        {
+          "Name": "id",
+          "Type": "String",
+          "Mandatory": "True",
+          "In": "body"
+        },
+        {
+          "Name": "Argument2",
+          "Type": "String",
+          "Mandatory": "False",
+          "In": "body"
+        }
+      ]
+    },
+    "Route": "/python/helloworld",
+    "Method": "GET",
+    "JobType": "asynchronous",
+    "Topic": "topic1",
+    "Timeout": "15000",
+    "AddRequestIDParam": "True"
+  }

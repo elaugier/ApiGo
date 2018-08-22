@@ -1,9 +1,9 @@
 {
-    "Name": "Route1",
+    "Name": "Hello World Powershell",
     "Cmd": {
-      "Name": "Command1",
+      "Name": "HelloWorld",
       "Type": "Powershell",
-      "PSModule": "PSModule",
+      "PSModule": "powershellScript",
       "Params": [
         {
           "Name": "Argument1",
@@ -19,11 +19,11 @@
         }
       ]
     },
-    "Route": "/route1",
+    "Route": "/powershell/helloworld",
     "Method": "POST",
     "JobType": "synchronous",
     "Topic": "topic1",
     "Timeout": "15000",
-    "AddRequestIdParam": "True"
+    "AddRequestIDParam": "True"
   }
   
