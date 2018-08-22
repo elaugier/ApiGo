@@ -50,7 +50,9 @@ And as soon as possible:
 
 * Messaging System
 
-	- Apache Kafka 2.0.0 : [Download](https://kafka.apache.org/downloads) [Quickstart](https://kafka.apache.org/quickstart)
+	- Apache Kafka : [Download](https://kafka.apache.org/downloads) [Quickstart](https://kafka.apache.org/quickstart)
+  - Pivotal RabbitMQ : [Get Started](http://www.rabbitmq.com/#getstarted)
+  - ZeroMQ : [Learn Basics](http://zeromq.org/intro:read-the-manual) [Download](http://zeromq.org/intro:get-the-software)
 
 * Database compliance
 
