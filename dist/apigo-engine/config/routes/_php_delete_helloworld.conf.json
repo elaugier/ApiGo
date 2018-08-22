@@ -1,0 +1,21 @@
+{
+    "Name": "Hello World PHP",
+    "Cmd": {
+      "Name": "HelloWorld",
+      "Type": "PHP",
+      "Params": [
+        {
+          "Name": "id",
+          "Type": "String",
+          "Mandatory": "True",
+          "In": "uri"
+        }
+      ]
+    },
+    "Route": "/php/helloworld/{id}",
+    "Method": "DELETE",
+    "JobType": "asynchronous",
+    "Topic": "topic1",
+    "Timeout": "15000",
+    "AddRequestIDParam": "True"
+  }

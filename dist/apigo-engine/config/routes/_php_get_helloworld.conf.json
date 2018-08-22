@@ -1,0 +1,27 @@
+{
+    "Name": "Hello World PHP",
+    "Cmd": {
+      "Name": "HelloWorld",
+      "Type": "PHP",
+      "Params": [
+        {
+          "Name": "Argument1",
+          "Type": "String",
+          "Mandatory": "True",
+          "In": "querystring"
+        },
+        {
+          "Name": "Argument2",
+          "Type": "String",
+          "Mandatory": "False",
+          "In": "querystring"
+        }
+      ]
+    },
+    "Route": "/php/helloworld/{id}",
+    "Method": "GET",
+    "JobType": "asynchronous",
+    "Topic": "topic1",
+    "Timeout": "15000",
+    "AddRequestIDParam": "True"
+  }
