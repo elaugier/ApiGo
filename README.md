@@ -38,7 +38,7 @@ There are some components in ApiGo :
 
 * an API Engine : apigo-engine
 * a Worker : apigo-worker
-* a Message Broker : Apache Kafka
+* a Message Broker (Apache Kafka, RabbitMQ, ZeroMQ)
 * a Database (Postgresql, MySQL, etc.)
 
 ## Dependencies
