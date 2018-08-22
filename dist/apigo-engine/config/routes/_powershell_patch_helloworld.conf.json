@@ -19,7 +19,7 @@
         }
       ]
     },
-    "Route": "/powershell/helloworld/{id}",
+    "Route": "/powershell/helloworld/:id",
     "Method": "PATCH",
     "JobType": "synchronous",
     "Topic": "topic1",

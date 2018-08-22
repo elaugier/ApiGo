@@ -12,7 +12,7 @@
         }
       ]
     },
-    "Route": "/ruby/helloworld/{id}",
+    "Route": "/ruby/helloworld/:id",
     "Method": "DELETE",
     "JobType": "asynchronous",
     "Topic": "topic1",

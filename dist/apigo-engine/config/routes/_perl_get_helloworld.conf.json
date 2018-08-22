@@ -18,7 +18,7 @@
         }
       ]
     },
-    "Route": "/perl/helloworld/{id}",
+    "Route": "/perl/helloworld/:id",
     "Method": "GET",
     "JobType": "asynchronous",
     "Topic": "topic1",

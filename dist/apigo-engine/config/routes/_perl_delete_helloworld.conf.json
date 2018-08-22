@@ -12,7 +12,7 @@
         }
       ]
     },
-    "Route": "/perl/helloworld/{id}",
+    "Route": "/perl/helloworld/:id",
     "Method": "DELETE",
     "JobType": "asynchronous",
     "Topic": "topic1",

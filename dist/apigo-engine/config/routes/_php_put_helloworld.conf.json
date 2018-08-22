@@ -18,7 +18,7 @@
         }
       ]
     },
-    "Route": "/php/helloworld/{id}",
+    "Route": "/php/helloworld/:id",
     "Method": "PUT",
     "JobType": "asynchronous",
     "Topic": "topic1",

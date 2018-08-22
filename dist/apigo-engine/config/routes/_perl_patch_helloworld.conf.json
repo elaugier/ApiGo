@@ -18,7 +18,7 @@
         }
       ]
     },
-    "Route": "/perl/helloworld/{id}",
+    "Route": "/perl/helloworld/:id",
     "Method": "PATCH",
     "JobType": "asynchronous",
     "Topic": "topic1",

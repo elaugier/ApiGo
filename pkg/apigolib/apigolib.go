@@ -1,5 +1,10 @@
 package apigolib
 
+import (
+	"log"
+	"runtime"
+)
+
 //DbConfig ...
 type DbConfig struct {
 	AdminDatabase    string `json:"AdminDatabase"`
@@ -27,12 +32,20 @@ type ConfigFileEngine struct {
 	Secure                          bool          `json:"Secure"`
 }
 
-//JsonCmd ...
-type JsonCmd struct {
-	Uuid     string            `json:"Uuid`
+//JSONCmd ...
+type JSONCmd struct {
+	UUID     string            `json:"Uuid"`
 	Name     string            `json:"Name"`
 	Type     string            `json:"Type"`
 	PSModule string            `json:"PSModule"`
 	PyEnv    string            `json:"PyEnv"`
 	Args     map[string]string `json:"Args"`
+}
+
+//Trace ...
+func Trace() {
+	pc := make([]uintptr, 10) // at least 1 entry needed
+	runtime.Callers(2, pc)
+	f := runtime.FuncForPC(pc[0])
+	log.Printf("Entering in %s\n", f.Name())
 }

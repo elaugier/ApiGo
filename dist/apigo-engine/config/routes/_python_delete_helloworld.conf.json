@@ -13,7 +13,7 @@
         }
       ]
     },
-    "Route": "/python/helloworld/{id}",
+    "Route": "/python/helloworld/:id",
     "Method": "DELETE",
     "JobType": "asynchronous",
     "Topic": "topic1",

@@ -18,7 +18,7 @@
         }
       ]
     },
-    "Route": "/ruby/helloworld/{id}",
+    "Route": "/ruby/helloworld/:id",
     "Method": "PUT",
     "JobType": "asynchronous",
     "Topic": "topic1",

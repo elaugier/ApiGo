@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/elaugier/ApiGo/pkg/apigolib"
 	"github.com/spf13/viper"
 
 	"github.com/gin-gonic/gin"
@@ -14,20 +15,16 @@ var RoutesConfigs map[int]*viper.Viper
 
 //SynchronousJob ...
 func SynchronousJob(c *gin.Context) {
+	apigolib.Trace()
 	buf, _ := c.Get("id")
 	id := buf.(int)
-
-	currentRoute := RoutesConfigs[id].GetString("Name")
-
-	expectedParams := RoutesConfigs[id].GetStringMapString("Cmd.Params")
-
-	for p, v := range expectedParams {
-		log.Printf("param %s => %s", p, v)
+	var Route RouteConfig
+	err := RoutesConfigs[id].Unmarshal(&Route)
+	if err != nil {
+		log.Fatalf("unable to decode into struct, %v", err)
 	}
-	//request := c.Request
-
-	//p := apigokafka.Producer
-
+	currentRoute := Route.Name
+	log.Printf("Current Route => %s", currentRoute)
 	c.JSON(200, gin.H{
 		"msg": fmt.Sprintf("%s", currentRoute),
 	})
@@ -35,17 +32,16 @@ func SynchronousJob(c *gin.Context) {
 
 //AsynchronousJob ...
 func AsynchronousJob(c *gin.Context) {
+	apigolib.Trace()
 	buf, _ := c.Get("id")
 	id := buf.(int)
-
-	currentRoute := RoutesConfigs[id].GetString("Name")
-
-	expectedParams := RoutesConfigs[id].GetStringMapString("Cmd.Params")
-
-	for p, v := range expectedParams {
-		log.Printf("param %s => %s", p, v)
+	var Route RouteConfig
+	err := RoutesConfigs[id].Unmarshal(&Route)
+	if err != nil {
+		log.Fatalf("unable to decode into struct, %v", err)
 	}
-
+	currentRoute := Route.Name
+	log.Printf("Current Route => %s", currentRoute)
 	c.JSON(200, gin.H{
 		"msg": fmt.Sprintf("%s", currentRoute),
 	})

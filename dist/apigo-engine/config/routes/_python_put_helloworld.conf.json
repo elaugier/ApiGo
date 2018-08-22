@@ -19,7 +19,7 @@
         }
       ]
     },
-    "Route": "/python/helloworld/{id}",
+    "Route": "/python/helloworld/:id",
     "Method": "PUT",
     "JobType": "asynchronous",
     "Topic": "topic1",
