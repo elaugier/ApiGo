@@ -1,8 +1,8 @@
 {
-    "Name": "Hello World Perl",
+    "Name": "Hello World Ruby",
     "Cmd": {
       "Name": "HelloWorld",
-      "Type": "Perl",
+      "Type": "Ruby",
       "Params": [
         {
           "Name": "id",
@@ -18,7 +18,7 @@
         }
       ]
     },
-    "Route": "/perl/helloworld/{id}",
+    "Route": "/ruby/helloworld/{id}",
     "Method": "PATCH",
     "JobType": "asynchronous",
     "Topic": "topic1",
