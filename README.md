@@ -34,12 +34,17 @@ ApiGo is an API engine which allow to build quickly a REST API without developme
 
 ## Components
 
-There are some components in ApiGo :
+There are some components in ApiGo:
 
-* an API Engine : apigo-engine
-* a Worker : apigo-worker
-* a Message Broker (Apache Kafka, RabbitMQ, ZeroMQ)
-* a Database (Postgresql, MySQL, etc.)
+* an API Engine: apigo-engine
+* a Worker: apigo-worker
+* a Message Broker: Apache Kafka, RabbitMQ, ZeroMQ
+* a Database: Postgresql, MySQL, etc.
+
+And as soon as possible:
+
+* an Authentication service
+* an Authorization service (per App Domain)
 
 ## Dependencies
 
