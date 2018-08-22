@@ -19,7 +19,7 @@
       ]
     },
     "Route": "/perl/helloworld/{id}",
-    "Method": "PUT",
+    "Method": "PATCH",
     "JobType": "asynchronous",
     "Topic": "topic1",
     "Timeout": "15000",
