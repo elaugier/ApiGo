@@ -50,3 +50,16 @@ func AsynchronousJob(c *gin.Context) {
 		"msg": fmt.Sprintf("%s", currentRoute),
 	})
 }
+
+//Parameter ...
+type Parameter struct {
+	Name      string `json:"Name"`
+	Type      string `json:"Type"`
+	Mandatory string `json:"Mandatory"`
+	In        string `json:"In"`
+}
+
+//RouteConfig ...
+type RouteConfig struct {
+	Name string `json:"Name"`
+}
