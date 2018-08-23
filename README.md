@@ -46,13 +46,15 @@ There are some components in ApiGo:
 
 * an API Engine: apigo-engine
 * a Worker: apigo-worker
-* a Message Broker: Apache Kafka, RabbitMQ, ZeroMQ
+* a Message Broker: Apache Kafka, RabbitMQ, ZeroMQ*
 * a Database: Postgresql, MySQL, etc.
 
 And as soon as possible:
 
 * an Authentication service
 * an Authorization service (per App Domain)
+
+*: February 2019 : because 0MQ is not directly compliant with Windows build 
 
 ## Dependencies
 
@@ -225,7 +227,9 @@ At root, there is a file _default.json_. This is the main configuration.
   },
   "ScriptsPath": "config\\scripts",
   "WorkerTopic": "winworkersTopic",
-  "OnMessageTimeout": "10000"
+  "OnMessageTimeout": "10000",
+  "MaxConcurrentJobs":"0",
+  "PoolWaitingTime","100"
 }
 ~~~~
 
