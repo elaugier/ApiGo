@@ -3,6 +3,7 @@ package apigohandlers
 import (
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/elaugier/ApiGo/pkg/apigolib"
 	"github.com/spf13/viper"
@@ -79,29 +80,38 @@ func AsynchronousJob(c *gin.Context) {
 		p := Route.Cmd.Params[i]
 
 		log.Printf("Expected parameter name: %s", p.Name)
+		mandatory, err := strconv.ParseBool(p.Mandatory)
+		if err == nil {
+			switch p.In {
+			case "uri":
+				value := c.Param(p.Name)
+				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
-		switch p.In {
-		case "uri":
-			value := c.Param(p.Name)
-			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+				if value == "" && mandatory {
+					log.Printf("Parameter '%s' is mandatory => raise error and add message for response", p.Name)
+				}
+				if value == "" && !mandatory {
+					log.Printf("Parameter '%s' is not mandatory but empty => no action", p.Name)
+				}
 
-		case "header":
-			value := c.GetHeader(p.Name)
-			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+			case "header":
+				value := c.GetHeader(p.Name)
+				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
-		case "querystring":
-			value := c.Query(p.Name)
-			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+			case "querystring":
+				value := c.Query(p.Name)
+				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
-		case "body":
-			var keyValue map[string]string
-			c.BindJSON(&keyValue)
-			value := keyValue[p.Name]
-			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+			case "body":
+				var keyValue map[string]string
+				c.BindJSON(&keyValue)
+				value := keyValue[p.Name]
+				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
-		default:
-			log.Printf("Unkown 'In' value for param '%s'", p.Name)
+			default:
+				log.Printf("Unkown 'In' value for param '%s'", p.Name)
 
+			}
 		}
 	}
 
