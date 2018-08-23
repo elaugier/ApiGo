@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/elaugier/ApiGo/pkg/apigohandlers"
+	"github.com/elaugier/ApiGo/pkg/apigomiddleware"
 
 	"github.com/elaugier/ApiGo/pkg/apigoconfig"
 	"github.com/spf13/viper"
@@ -29,12 +30,16 @@ func Get(pathConfig string) (*gin.Engine, error) {
 	log.Println("Create default gin engine")
 	r := gin.Default()
 
+	r.Use(apigomiddleware.Apikey)
+	r.Use(apigomiddleware.Db())
+
+	log.Println("setup 404 handler")
+	r.NoRoute(apigohandlers.PageNotFound)
+
 	log.Println("setup '/ping' route")
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.GET("/ping", apigohandlers.Ping)
+
+	r.GET("/job/:uuid", apigohandlers.GetJobStatus)
 
 	folderPath, err := osext.ExecutableFolder()
 	if err != nil {

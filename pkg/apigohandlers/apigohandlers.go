@@ -277,6 +277,30 @@ func AsynchronousJob(c *gin.Context) {
 	})
 }
 
+//GetJobStatus ...
+func GetJobStatus(c *gin.Context) {
+	UUID := c.Param("uuid")
+	c.JSON(200, gin.H{
+		"msg": fmt.Sprintf("%s", UUID),
+	})
+}
+
+//Ping ...
+func Ping(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"msg": "pong",
+	})
+}
+
+//PageNotFound ...
+func PageNotFound(c *gin.Context) {
+	c.JSON(404, gin.H{
+		"sts": "failed",
+		"hco": "404",
+		"msg": "PageNotFound",
+	})
+}
+
 //IsValueTypeOfExpected ...
 func IsValueTypeOfExpected(value string, typeExpected string) bool {
 	switch strings.ToLower(typeExpected) {
