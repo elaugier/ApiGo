@@ -3,6 +3,14 @@
 <img src="https://github.com/elaugier/ApiGo/blob/master/apigo-logo-180.png?raw=true"/>
 </p>
 
+* * *
+
+# IMPORTANT
+
+ApiGo is currently in development. I'm working hard to release the first stable and usable version for the end of september 2018.
+
+* * *
+
 ## Table of Contents
 
 1. [What is ApiGo?](#what-is-coreapi)
