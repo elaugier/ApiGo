@@ -24,6 +24,38 @@ func SynchronousJob(c *gin.Context) {
 		log.Fatalf("unable to decode into struct, %v", err)
 	}
 	currentRoute := Route.Name
+
+	for i := 0; i < len(Route.Cmd.Params); i++ {
+
+		p := Route.Cmd.Params[i]
+
+		log.Printf("Expected parameter name: %s", p.Name)
+
+		switch p.In {
+		case "uri":
+			value := c.Param(p.Name)
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		case "header":
+			value := c.GetHeader(p.Name)
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		case "querystring":
+			value := c.Query(p.Name)
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		case "body":
+			var keyValue map[string]string
+			c.BindJSON(&keyValue)
+			value := keyValue[p.Name]
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		default:
+			log.Printf("Unkown 'In' value for param '%s'", p.Name)
+
+		}
+	}
+
 	log.Printf("Current Route => %s", currentRoute)
 	c.JSON(200, gin.H{
 		"msg": fmt.Sprintf("%s", currentRoute),
@@ -41,6 +73,38 @@ func AsynchronousJob(c *gin.Context) {
 		log.Fatalf("unable to decode into struct, %v", err)
 	}
 	currentRoute := Route.Name
+
+	for i := 0; i < len(Route.Cmd.Params); i++ {
+
+		p := Route.Cmd.Params[i]
+
+		log.Printf("Expected parameter name: %s", p.Name)
+
+		switch p.In {
+		case "uri":
+			value := c.Param(p.Name)
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		case "header":
+			value := c.GetHeader(p.Name)
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		case "querystring":
+			value := c.Query(p.Name)
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		case "body":
+			var keyValue map[string]string
+			c.BindJSON(&keyValue)
+			value := keyValue[p.Name]
+			log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
+
+		default:
+			log.Printf("Unkown 'In' value for param '%s'", p.Name)
+
+		}
+	}
+
 	log.Printf("Current Route => %s", currentRoute)
 	c.JSON(200, gin.H{
 		"msg": fmt.Sprintf("%s", currentRoute),
