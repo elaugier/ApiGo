@@ -32,7 +32,6 @@ func Get(pathConfig string) (*gin.Engine, error) {
 
 	r.Use(apigomiddleware.RequestUUID())
 	r.Use(apigomiddleware.Apikey())
-	r.Use(apigomiddleware.Db())
 
 	log.Println("setup 404 handler")
 	r.NoRoute(apigohandlers.PageNotFound)
