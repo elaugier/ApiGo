@@ -36,6 +36,10 @@ func Get(pathConfig string) (*gin.Engine, error) {
 	log.Println("setup 404 handler")
 	r.NoRoute(apigohandlers.PageNotFound)
 
+	log.Println("setup 405 handler")
+	r.NoMethod(apigohandlers.MethodNotAllowed)
+	r.HandleMethodNotAllowed = true
+
 	log.Println("setup '/ping' route")
 	r.GET("/ping", apigohandlers.Ping("toto"))
 

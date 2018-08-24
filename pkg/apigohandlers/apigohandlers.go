@@ -207,6 +207,15 @@ func PageNotFound(c *gin.Context) {
 	})
 }
 
+//MethodNotAllowed ...
+func MethodNotAllowed(c *gin.Context) {
+	c.JSON(405, gin.H{
+		"sts": "failed",
+		"hco": "405",
+		"msg": "MethodNotAllowed",
+	})
+}
+
 //IsValueTypeOfExpected ...
 func IsValueTypeOfExpected(value string, typeExpected string) bool {
 	switch strings.ToLower(typeExpected) {
