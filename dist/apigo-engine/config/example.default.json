@@ -13,7 +13,7 @@
       "Driver": "postgres"
     },
     "KafkaProducer": {
-      "Bootstrap.servers": "192.168.144.19:9092/kafka"
+      "BootstrapServers": "192.168.144.19:9092/kafka"
     },
     "MaxConcurrentConnections": "0",
     "MaxConcurrentUpgradeConnections": "0",

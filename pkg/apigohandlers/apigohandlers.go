@@ -7,11 +7,17 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/google/uuid"
+
+	"github.com/elaugier/ApiGo/pkg/apigohelpers"
 	"github.com/elaugier/ApiGo/pkg/apigolib"
 	"github.com/spf13/viper"
 
 	"github.com/gin-gonic/gin"
 )
+
+//Config ...
+var Config viper.Viper
 
 //RoutesConfigs ...
 var RoutesConfigs map[int]*viper.Viper
@@ -19,8 +25,18 @@ var RoutesConfigs map[int]*viper.Viper
 //SynchronousJob ...
 func SynchronousJob(c *gin.Context) {
 	apigolib.Trace()
-	currentRoute, err := params(c)
+	currentRoute, j, t, err := params(c)
 	if err != nil {
+		return
+	}
+	k := apigohelpers.NewKafka()
+	err = k.Send(j, t)
+	if err != nil {
+		errorMsg := fmt.Sprintf("Error on send synchonous job : %v", err)
+		log.Println(errorMsg)
+		c.JSON(500, gin.H{
+			"msg": fmt.Sprintln(errorMsg),
+		})
 		return
 	}
 	c.JSON(200, gin.H{
@@ -31,8 +47,18 @@ func SynchronousJob(c *gin.Context) {
 //AsynchronousJob ...
 func AsynchronousJob(c *gin.Context) {
 	apigolib.Trace()
-	currentRoute, err := params(c)
+	currentRoute, j, t, err := params(c)
 	if err != nil {
+		return
+	}
+	k := apigohelpers.NewKafka()
+	err = k.Send(j, t)
+	if err != nil {
+		errorMsg := fmt.Sprintf("Error on send synchonous job : %v", err)
+		log.Println(errorMsg)
+		c.JSON(500, gin.H{
+			"msg": fmt.Sprintln(errorMsg),
+		})
 		return
 	}
 	c.JSON(200, gin.H{
@@ -40,7 +66,7 @@ func AsynchronousJob(c *gin.Context) {
 	})
 }
 
-func params(c *gin.Context) (string, error) {
+func params(c *gin.Context) (string, apigohelpers.JSONCmd, string, error) {
 	buf, _ := c.Get("id")
 	id := buf.(int)
 	var Route RouteConfig
@@ -50,6 +76,8 @@ func params(c *gin.Context) (string, error) {
 	}
 	currentRoute := Route.Name
 	log.Printf("Current Route => %s", currentRoute)
+	currentParams := make(map[string]string)
+	var value string
 	for i := 0; i < len(Route.Cmd.Params); i++ {
 
 		p := Route.Cmd.Params[i]
@@ -59,7 +87,7 @@ func params(c *gin.Context) (string, error) {
 		if err == nil {
 			switch p.In {
 			case "uri":
-				value := c.Param(p.Name)
+				value = c.Param(p.Name)
 				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
 				if value == "" && mandatory {
@@ -68,7 +96,7 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 				if value == "" && !mandatory {
@@ -80,11 +108,11 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 			case "header":
-				value := c.GetHeader(p.Name)
+				value = c.GetHeader(p.Name)
 				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
 				if value == "" && mandatory {
@@ -93,7 +121,7 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 				if value == "" && !mandatory {
@@ -105,11 +133,11 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 			case "querystring":
-				value := c.Query(p.Name)
+				value = c.Query(p.Name)
 				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
 				if value == "" && mandatory {
@@ -118,7 +146,7 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 				if value == "" && !mandatory {
@@ -130,13 +158,13 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 			case "body":
 				var keyValue map[string]string
 				c.BindJSON(&keyValue)
-				value := keyValue[p.Name]
+				value = keyValue[p.Name]
 				log.Printf("retrieve key '%s' => '%s' from %s", p.Name, value, p.In)
 
 				if value == "" && mandatory {
@@ -145,7 +173,7 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 				if value == "" && !mandatory {
@@ -157,7 +185,7 @@ func params(c *gin.Context) (string, error) {
 					c.JSON(400, gin.H{
 						"msg": errMsg,
 					})
-					return "", errors.New(errMsg)
+					return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 				}
 
 			default:
@@ -166,7 +194,7 @@ func params(c *gin.Context) (string, error) {
 				c.JSON(500, gin.H{
 					"msg": errMsg,
 				})
-				return "", errors.New(errMsg)
+				return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 			}
 		} else {
 			errMsg := fmt.Sprintf("Error while parsing Mandatory option for param %s", p.Name)
@@ -174,10 +202,27 @@ func params(c *gin.Context) (string, error) {
 			c.JSON(500, gin.H{
 				"msg": errMsg,
 			})
-			return "", errors.New(errMsg)
+			return "", apigohelpers.JSONCmd{}, Route.Topic, errors.New(errMsg)
 		}
+		currentParams[p.Name] = value
 	}
-	return currentRoute, nil
+	jid, err := uuid.NewUUID()
+	if err != nil {
+		log.Printf("Error on generating jid : %v", err)
+		return "", apigohelpers.JSONCmd{}, Route.Topic, err
+	}
+	mid := jid.String()
+	j := apigohelpers.JSONCmd{
+		UUID:     mid,
+		Name:     Route.Cmd.Name,
+		Type:     Route.Cmd.Type,
+		PSModule: Route.Cmd.PSModule,
+		PyVenv:   Route.Cmd.PyVenv,
+		Params:   currentParams,
+		JobType:  Route.JobType,
+		Timeout:  Route.Timeout,
+	}
+	return "", j, Route.Topic, nil
 }
 
 //GetJobStatus ...
