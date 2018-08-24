@@ -283,9 +283,17 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:05662433b3a13c921587a6e622b5722072edff83211efd1cd79eeaeedfd83f07"
+  digest = "1:be7ed7653e365ee45fcb671de9580ec81015e27be913181830970c2ddb8d634b"
   name = "golang.org/x/sys"
-  packages = ["unix"]
+  packages = [
+    "unix",
+    "windows",
+    "windows/registry",
+    "windows/svc",
+    "windows/svc/debug",
+    "windows/svc/eventlog",
+    "windows/svc/mgr",
+  ]
   pruneopts = "UT"
   revision = "1c9583448a9c3aa0f9a6a5241bf73c0bd8aafded"
 
@@ -344,6 +352,10 @@
     "github.com/kardianos/osext",
     "github.com/spf13/viper",
     "github.com/streadway/amqp",
+    "golang.org/x/sys/windows/svc",
+    "golang.org/x/sys/windows/svc/debug",
+    "golang.org/x/sys/windows/svc/eventlog",
+    "golang.org/x/sys/windows/svc/mgr",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
