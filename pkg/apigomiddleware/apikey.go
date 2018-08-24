@@ -6,7 +6,11 @@ import (
 )
 
 //Apikey ...
-func Apikey(c *gin.Context) {
+func Apikey() gin.HandlerFunc {
 	apigolib.Trace()
-	c.Next()
+	return func(c *gin.Context) {
+		apigolib.Trace()
+		c.Next()
+	}
+
 }

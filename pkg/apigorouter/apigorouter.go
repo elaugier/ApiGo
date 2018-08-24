@@ -30,7 +30,8 @@ func Get(pathConfig string) (*gin.Engine, error) {
 	log.Println("Create default gin engine")
 	r := gin.Default()
 
-	r.Use(apigomiddleware.Apikey)
+	r.Use(apigomiddleware.RequestUUID())
+	r.Use(apigomiddleware.Apikey())
 	r.Use(apigomiddleware.Db())
 
 	log.Println("setup 404 handler")
