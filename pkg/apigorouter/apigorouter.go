@@ -37,7 +37,7 @@ func Get(pathConfig string) (*gin.Engine, error) {
 	r.NoRoute(apigohandlers.PageNotFound)
 
 	log.Println("setup '/ping' route")
-	r.GET("/ping", apigohandlers.Ping)
+	r.GET("/ping", apigohandlers.Ping("toto"))
 
 	r.GET("/job/:uuid", apigohandlers.GetJobStatus)
 
