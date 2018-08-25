@@ -11,7 +11,7 @@ import (
 	"github.com/elaugier/ApiGo/pkg/apigoconfig"
 	"github.com/spf13/viper"
 
-	"github.com/bmatcuk/doublestar"
+	"github.com/elaugier/ApiGo/pkg/doublestar"
 	"github.com/gin-gonic/gin"
 	"github.com/kardianos/osext"
 )
