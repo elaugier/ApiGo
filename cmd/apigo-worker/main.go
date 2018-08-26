@@ -53,6 +53,12 @@ func main() {
 	group := config.GetString("KafkaConsumer.GroupId")
 	topics := []string{config.GetString("WorkerTopic")}
 
+	m := config.GetString("MaxConcurrentJobs")
+	maxConcurrentJobs, err := strconv.ParseInt(m, 10, 64)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 
@@ -72,6 +78,10 @@ func main() {
 
 	run := true
 
+	P := apigoprocessor.NewProcessor()
+
+	done := make(chan string, 1)
+
 	for run == true {
 		select {
 		case sig := <-sigchan:
@@ -90,7 +100,12 @@ func main() {
 				if e.Headers != nil {
 					log.Printf("%% Headers: %v\n", e.Headers)
 				}
-				apigoprocessor.Process(e)
+				if maxConcurrentJobs == 0 || P.GetCurrentJobsCount() < maxConcurrentJobs {
+					go P.Process(e, done)
+				}
+				else {
+					<-done
+				}
 			case kafka.PartitionEOF:
 				log.Printf("%% Reached %v\n", e)
 			case kafka.Error:

@@ -15,5 +15,6 @@
     },
     "ScriptsPath": "config\\scripts",
     "WorkerTopic": "winworkersTopic",
-    "OnMessageTimeout": "10000"
+    "OnMessageTimeout": "10000",
+    "MaxConcurrentJobs": "0"
   }

@@ -13,9 +13,27 @@ import (
 	"github.com/elaugier/ApiGo/pkg/apigolib"
 )
 
+//NewProcessor ...
+func NewProcessor() Processor {
+	return Processor{
+		currentJobsCount: 0,
+	}
+}
+
+//Processor ...
+type Processor struct {
+	currentJobsCount int64
+}
+
+//GetCurrentJobsCount ...
+func (p Processor) GetCurrentJobsCount() int64 {
+	return p.currentJobsCount
+}
+
 //Process ...
-func Process(message *kafka.Message) {
+func (p Processor) Process(message *kafka.Message, done chan string) {
 	var msg apigolib.JSONCmd
+	p.currentJobsCount++
 	exitCode := 0
 	result := ""
 	var err error
@@ -44,6 +62,8 @@ func Process(message *kafka.Message) {
 		result = fmt.Sprintf("Unknown type detected for job %s : %s", msg.UUID, msg.Type)
 		err = errors.New(result)
 	}
+	p.currentJobsCount--
+	done <- "OK"
 
 	if exitCode != 0 || err != nil {
 
