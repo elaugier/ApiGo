@@ -3,14 +3,20 @@ package apigohandlers
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"path/filepath"
 	"strconv"
 	"strings"
 
+	"gopkg.in/yaml.v2"
+
 	"github.com/google/uuid"
+	"github.com/kardianos/osext"
 
 	"github.com/elaugier/ApiGo/pkg/apigohelpers"
 	"github.com/elaugier/ApiGo/pkg/apigolib"
+	"github.com/elaugier/ApiGo/pkg/doublestar"
 	"github.com/spf13/viper"
 
 	"github.com/gin-gonic/gin"
@@ -233,6 +239,53 @@ func GetJobStatus(c *gin.Context) {
 	})
 }
 
+//GetSwagger ...
+func GetSwagger(pathConfig string) gin.HandlerFunc {
+	folderPath, err := osext.ExecutableFolder()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	headerYAML := folderPath + "/config/swagger.default.yaml"
+	b, err := ioutil.ReadFile(headerYAML)
+	if err != nil {
+		log.Print(err)
+	}
+	swaggerYAML := string(b)
+
+	pattern := pathConfig + "/**/*.conf.json"
+	volumeName := filepath.VolumeName(pattern)
+	if volumeName == "" || strings.HasPrefix(pathConfig, "/") {
+		pattern = folderPath + "/" + pathConfig + "/**/*.conf.yaml"
+	}
+	log.Printf("Try to retrieve routes configurations in path : %s", pattern)
+
+	filesConf, err := doublestar.Glob(pattern)
+	if err != nil {
+		log.Printf("error on recursive search for *.conf.json in folder : %s => %v", pathConfig, err)
+	}
+
+	for i, f := range filesConf {
+		file, err := ioutil.ReadFile(f)
+		if err != nil {
+			log.Print(err)
+		}
+		swaggerYAML = swaggerYAML + string(file)
+		log.Printf("(%d ==> %s", i, f)
+	}
+
+	return func(c *gin.Context) {
+		var body interface{}
+		if err := yaml.Unmarshal([]byte(swaggerYAML), &body); err != nil {
+			log.Fatal(err)
+		}
+
+		body = convert(body)
+
+		c.JSON(200, body)
+	}
+}
+
 //Ping ...
 func Ping(version string) gin.HandlerFunc {
 	apigolib.Trace()
@@ -284,6 +337,23 @@ func IsValueTypeOfExpected(value string, typeExpected string) bool {
 		return true
 	}
 	return true
+}
+
+//convert ...
+func convert(i interface{}) interface{} {
+	switch x := i.(type) {
+	case map[interface{}]interface{}:
+		m2 := map[string]interface{}{}
+		for k, v := range x {
+			m2[k.(string)] = convert(v)
+		}
+		return m2
+	case []interface{}:
+		for i, v := range x {
+			x[i] = convert(v)
+		}
+	}
+	return i
 }
 
 //Parameter ...

@@ -45,6 +45,8 @@ func Get(pathConfig string) (*gin.Engine, error) {
 
 	r.GET("/job/:uuid", apigohandlers.GetJobStatus)
 
+	r.GET("/swagger", apigohandlers.GetSwagger(pathConfig))
+
 	folderPath, err := osext.ExecutableFolder()
 	if err != nil {
 		log.Fatal(err)
