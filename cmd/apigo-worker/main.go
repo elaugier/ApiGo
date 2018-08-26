@@ -10,6 +10,8 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/elaugier/ApiGo/pkg/apigoprocessor"
+
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/elaugier/ApiGo/pkg/apigoconfig"
 	"github.com/kardianos/osext"
@@ -88,6 +90,7 @@ func main() {
 				if e.Headers != nil {
 					log.Printf("%% Headers: %v\n", e.Headers)
 				}
+				apigoprocessor.Process(e)
 			case kafka.PartitionEOF:
 				log.Printf("%% Reached %v\n", e)
 			case kafka.Error:
