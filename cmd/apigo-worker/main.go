@@ -102,8 +102,7 @@ func main() {
 				}
 				if maxConcurrentJobs == 0 || P.GetCurrentJobsCount() < maxConcurrentJobs {
 					go P.Process(e, done)
-				}
-				else {
+				} else {
 					<-done
 				}
 			case kafka.PartitionEOF:
