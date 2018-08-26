@@ -347,6 +347,7 @@
     "golang.org/x/sys/windows/svc/debug",
     "golang.org/x/sys/windows/svc/eventlog",
     "golang.org/x/sys/windows/svc/mgr",
+    "gopkg.in/yaml.v2",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
