@@ -42,5 +42,6 @@
               "maxStructFields": -1
             }
           }
-    }
-}
+    },
+    "glassit.alpha": 230
+  }

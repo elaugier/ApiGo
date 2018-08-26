@@ -85,8 +85,10 @@ func main() {
 	for run == true {
 		select {
 		case sig := <-sigchan:
+
 			log.Printf("Caught signal %v: terminating\n", sig)
 			run = false
+
 		default:
 			ev := c.Poll(100)
 			if ev == nil {
@@ -95,6 +97,7 @@ func main() {
 
 			switch e := ev.(type) {
 			case *kafka.Message:
+
 				log.Printf("%% Message on %s:\n%s\n",
 					e.TopicPartition, string(e.Value))
 				if e.Headers != nil {
@@ -105,13 +108,20 @@ func main() {
 				} else {
 					<-done
 				}
+
 			case kafka.PartitionEOF:
+
 				log.Printf("%% Reached %v\n", e)
+
 			case kafka.Error:
+
 				log.Fatalf("%% Error: %v\n", e)
 				run = false
+
 			default:
+
 				log.Printf("Ignored %v\n", e)
+
 			}
 		}
 	}

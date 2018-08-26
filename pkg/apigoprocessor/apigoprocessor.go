@@ -64,7 +64,6 @@ func (p Processor) Process(message *kafka.Message, done chan string) {
 	}
 	p.currentJobsCount--
 	done <- "OK"
-
 	if exitCode != 0 || err != nil {
 
 	} else {
