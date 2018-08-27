@@ -54,7 +54,7 @@ func Get(pathConfig string) (*gin.Engine, error) {
 
 	pattern := pathConfig + "/**/*.conf.json"
 	volumeName := filepath.VolumeName(pattern)
-	if volumeName == "" || strings.HasPrefix(pathConfig, "/") {
+	if strings.HasPrefix(volumeName, "\\") || strings.HasPrefix(pathConfig, "/") {
 		pattern = folderPath + "/" + pathConfig + "/**/*.conf.json"
 	}
 	log.Printf("Try to retrieve routes configurations in path : %s", pattern)
