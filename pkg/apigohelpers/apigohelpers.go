@@ -13,6 +13,7 @@ import (
 
 //PowershellRun ...
 func PowershellRun(PSModule string, PSCmdLet string, args map[string]string) (int, string, error) {
+	scriptsPath := GetScriptsPath()
 	binaryName := "powershell.exe"
 	powershellArgs := []string{
 		"-NoProfile",
@@ -23,34 +24,20 @@ func PowershellRun(PSModule string, PSCmdLet string, args map[string]string) (in
 			powershellArgs[i] = "\"" + powershellArgs[i] + "\""
 		}
 	}
-	folderPath, err := osext.ExecutableFolder()
-	if err != nil {
-		log.Fatal(err)
-	}
 	var argsinline string
 	for key, value := range args {
 		argsinline += " " + key + " " + value
 	}
 	command := strings.Join(powershellArgs, " ")
 	powershellCommand := PSCmdLet + " " + argsinline
-	config, err := apigoconfig.Get()
-	if err != nil {
-		log.Fatal(err)
-	}
-	var pathModule string
-	scriptsPath := config.GetString("ScriptsPath")
-	volumeName := filepath.VolumeName(scriptsPath)
-	if strings.HasPrefix(volumeName, "\\") || strings.HasPrefix(scriptsPath, "/") {
-		pathModule = folderPath + scriptsPath + "/"
-	}
-	powershellModule := pathModule + PSModule
+	powershellModule := scriptsPath + "/psmodules/" + PSModule + "/" + PSModule + ".psm1"
 	command = strings.Replace(command, "{Cmd}", powershellCommand, 1)
 	command = strings.Replace(command, "{PSModule}", powershellModule, 1)
 	e := exec.Command(binaryName, command)
 	var stdout, stderr bytes.Buffer
 	e.Stdout = &stdout
 	e.Stderr = &stderr
-	err = e.Run()
+	err := e.Run()
 	if err != nil {
 		log.Printf("e.Run() failed with %s\n", err)
 		outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
@@ -64,6 +51,7 @@ func PowershellRun(PSModule string, PSCmdLet string, args map[string]string) (in
 
 //PythonRun ...
 func PythonRun(PyEnv string, PyScript string, args map[string]string) (int, string, error) {
+	//scriptsPath := GetScriptsPath()
 	binaryName := "python.exe"
 	exec.Command(binaryName, PyScript)
 	return 0, "OK", nil
@@ -71,6 +59,7 @@ func PythonRun(PyEnv string, PyScript string, args map[string]string) (int, stri
 
 //PerlRun ...
 func PerlRun(PerlScript string, args map[string]string) (int, string, error) {
+	//scriptsPath := GetScriptsPath()
 	binaryName := "perl.exe"
 	exec.Command(binaryName, PerlScript)
 	return 0, "OK", nil
@@ -78,6 +67,7 @@ func PerlRun(PerlScript string, args map[string]string) (int, string, error) {
 
 //RubyRun ...
 func RubyRun(RubyScript string, args map[string]string) (int, string, error) {
+	//scriptsPath := GetScriptsPath()
 	binaryName := "ruby.exe"
 	exec.Command(binaryName, RubyScript)
 	return 0, "OK", nil
@@ -88,4 +78,22 @@ func CLIRun(Command string, args map[string]string) (int, string, error) {
 	binaryName := "cmd.exe"
 	exec.Command(binaryName, Command)
 	return 0, "OK", nil
+}
+
+//GetScriptsPath ...
+func GetScriptsPath() string {
+	config, err := apigoconfig.Get()
+	if err != nil {
+		log.Fatal(err)
+	}
+	folderPath, err := osext.ExecutableFolder()
+	if err != nil {
+		log.Fatal(err)
+	}
+	scriptsPath := config.GetString("ScriptsPath")
+	volumeName := filepath.VolumeName(scriptsPath)
+	if strings.HasPrefix(volumeName, "\\") || strings.HasPrefix(scriptsPath, "/") {
+		scriptsPath = folderPath + scriptsPath + "/"
+	}
+	return scriptsPath
 }
