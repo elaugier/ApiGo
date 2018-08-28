@@ -4,11 +4,10 @@ import (
 	"bytes"
 	"log"
 	"os/exec"
-	"path/filepath"
 	"strings"
 
 	"github.com/elaugier/ApiGo/pkg/apigoconfig"
-	"github.com/kardianos/osext"
+	"github.com/rhysd/abspath"
 )
 
 //PowershellRun ...
@@ -86,14 +85,10 @@ func GetScriptsPath() string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	folderPath, err := osext.ExecutableFolder()
-	if err != nil {
-		log.Fatal(err)
-	}
 	scriptsPath := config.GetString("ScriptsPath")
-	volumeName := filepath.VolumeName(scriptsPath)
-	if strings.HasPrefix(volumeName, "\\") || strings.HasPrefix(scriptsPath, "/") {
-		scriptsPath = folderPath + scriptsPath + "/"
+	absScriptsConfigPath, err := abspath.ExpandFrom(scriptsPath)
+	if err != nil {
+		log.Fatalf("Error on absolute file expansion to retrieve scripts path config")
 	}
-	return scriptsPath
+	return absScriptsConfigPath.String()
 }

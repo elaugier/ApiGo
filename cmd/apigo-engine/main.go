@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/kardianos/osext"
+	"github.com/rhysd/abspath"
 
 	"github.com/elaugier/ApiGo/pkg/apigoconfig"
 	"github.com/elaugier/ApiGo/pkg/apigorouter"
@@ -100,8 +101,12 @@ func main() {
 		log.Println("enable gin ReleaseMode")
 		gin.SetMode(gin.ReleaseMode)
 	}
-
-	r, err := apigorouter.Get(config.GetString("RoutesConfigPath"))
+	routesConfigPath := config.GetString("RoutesConfigPath")
+	absRoutesConfigPath, err := abspath.ExpandFrom(routesConfigPath)
+	if err != nil {
+		log.Fatalf("Error on absolute file expansion to retrieve routes path config")
+	}
+	r, err := apigorouter.Get(absRoutesConfigPath.String())
 	if err != nil {
 		log.Panicf("Loading routes : FAILED! => %v", err)
 	}

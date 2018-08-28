@@ -2,7 +2,6 @@ package apigorouter
 
 import (
 	"log"
-	"path/filepath"
 	"strings"
 
 	"github.com/elaugier/ApiGo/pkg/apigohandlers"
@@ -13,7 +12,6 @@ import (
 
 	"github.com/elaugier/ApiGo/pkg/doublestar"
 	"github.com/gin-gonic/gin"
-	"github.com/kardianos/osext"
 )
 
 //CurrentRoute ...
@@ -30,7 +28,9 @@ func Get(pathConfig string) (*gin.Engine, error) {
 	log.Println("Create default gin engine")
 	r := gin.Default()
 
+	log.Println("Add Request UUID middleware")
 	r.Use(apigomiddleware.RequestUUID())
+	log.Println("Add ApiKey middleware")
 	r.Use(apigomiddleware.Apikey())
 
 	log.Println("setup 404 handler")
@@ -47,16 +47,8 @@ func Get(pathConfig string) (*gin.Engine, error) {
 
 	r.GET("/swagger", apigohandlers.GetSwagger(pathConfig))
 
-	folderPath, err := osext.ExecutableFolder()
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	pattern := pathConfig + "/**/*.conf.json"
-	volumeName := filepath.VolumeName(pattern)
-	if strings.HasPrefix(volumeName, "\\") || strings.HasPrefix(pathConfig, "/") {
-		pattern = folderPath + "/" + pathConfig + "/**/*.conf.json"
-	}
+
 	log.Printf("Try to retrieve routes configurations in path : %s", pattern)
 
 	filesConf, err := doublestar.Glob(pattern)
