@@ -51,6 +51,7 @@ func main() {
 
 	broker := config.GetString("KafkaConsumer.BootstrapServers")
 	group := config.GetString("KafkaConsumer.GroupId")
+	debug := config.GetString("KafkaConsumer.Debug")
 	topics := []string{config.GetString("WorkerTopic")}
 
 	m := config.GetString("MaxConcurrentJobs")
@@ -65,6 +66,7 @@ func main() {
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers":    broker,
 		"group.id":             group,
+		"debug":                debug,
 		"session.timeout.ms":   6000,
 		"default.topic.config": kafka.ConfigMap{"auto.offset.reset": "earliest"}})
 

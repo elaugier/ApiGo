@@ -11,6 +11,7 @@
     },
     "KafkaConsumer": {
       "BootstrapServers": "192.168.144.19:9092/kafka",
+      "Debug":"",
       "GroupId": "winworkers"
     },
     "ScriptsPath": "config\\scripts",

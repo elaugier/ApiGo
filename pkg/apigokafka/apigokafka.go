@@ -9,7 +9,9 @@ import (
 
 //NewProducer ...
 func NewProducer(config viper.Viper) *Producer {
-	p, err := kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": config.GetString("KafkaProducer.BootstrapServers")})
+	p, err := kafka.NewProducer(&kafka.ConfigMap{
+		"bootstrap.servers": config.GetString("KafkaProducer.BootstrapServers"),
+		"debug":             config.GetString("KafkaConsumer.Debug")})
 	if err != nil {
 		log.Printf("Kafka connection failed : %v", err)
 	}
