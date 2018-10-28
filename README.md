@@ -7,7 +7,7 @@
 
 # IMPORTANT
 
-ApiGo is currently in development. I'm working hard to release the first stable and usable version for the end of september 2018.
+ApiGo is currently in development. I'm working hard to release the first stable and usable version for the end of year 2018.
 
 * * *
 
