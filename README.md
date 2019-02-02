@@ -29,7 +29,6 @@ ApiGo is an API engine which allow to build quickly a REST API without developme
 
 ![Overview](https://github.com/elaugier/ApiGo/blob/master/docs/apigo-overview.png)
 
-
 ## Script Languages Compliance
 
 - [Powershell](https://docs.microsoft.com/powershell/)
@@ -44,30 +43,27 @@ ApiGo is an API engine which allow to build quickly a REST API without developme
 
 There are some components in ApiGo:
 
-*; an API Engine: apigo-engine
-*; a Worker: apigo-worker
-*; a Message Broker: Apache Kafka, RabbitMQ, ZeroMQ*
-*; a Database: Postgresql, MySQL, etc.
+* an API Engine: apigo-engine
+* a Worker: apigo-worker
+* a Message Broker: Apache Kafka, RabbitMQ, ZeroMQ*
+* a Database: Postgresql, MySQL, etc.
 
 And as soon as possible:
 
-*; an Authentication service
-*; an Authorization service (per App Domain)
+* an Authentication service
+* an Authorization service (per App Domain)
 
 ## Dependencies
 
 * Messaging System
-
-	- Apache Kafka : [Download](https://kafka.apache.org/downloads) [Quickstart](https://kafka.apache.org/quickstart)
-  - Pivotal RabbitMQ : [Get Started](http://www.rabbitmq.com/#getstarted)
-  - ZeroMQ : [Learn Basics](http://zeromq.org/intro:read-the-manual) [Download](http://zeromq.org/intro:get-the-software)
-
+  + Apache Kafka : [Download](https://kafka.apache.org/downloads) [Quickstart](https://kafka.apache.org/quickstart)
+  + Pivotal RabbitMQ : [Get Started](http://www.rabbitmq.com/#getstarted)
+  + ZeroMQ : [Learn Basics](http://zeromq.org/intro:read-the-manual) [Download](http://zeromq.org/intro:get-the-software)
 * Database compliance
-
-	- Postgresql
-	- MySQL
-	- Sql Server
-	- Sqlite
+	+ Postgresql
+	+ MySQL
+	+ Sql Server
+	+ Sqlite
 
 # Installation
 
