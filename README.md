@@ -7,7 +7,7 @@
 
 # IMPORTANT
 
-ApiGo is currently in development. I'm working hard to release the first stable and usable version for the end of year 2018.
+ApiGo is currently in development. For some private reasons, i can't work hard on this project. I hope have more time in several months. Sorry for that.
 
 * * *
 
@@ -44,17 +44,15 @@ ApiGo is an API engine which allow to build quickly a REST API without developme
 
 There are some components in ApiGo:
 
-* an API Engine: apigo-engine
-* a Worker: apigo-worker
-* a Message Broker: Apache Kafka, RabbitMQ, ZeroMQ*
-* a Database: Postgresql, MySQL, etc.
+*; an API Engine: apigo-engine
+*; a Worker: apigo-worker
+*; a Message Broker: Apache Kafka, RabbitMQ, ZeroMQ*
+*; a Database: Postgresql, MySQL, etc.
 
 And as soon as possible:
 
-* an Authentication service
-* an Authorization service (per App Domain)
-
-*: February 2019 : because 0MQ is not directly compliant with Windows build 
+*; an Authentication service
+*; an Authorization service (per App Domain)
 
 ## Dependencies
 
