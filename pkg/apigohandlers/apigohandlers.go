@@ -72,6 +72,20 @@ func AsynchronousJob(c *gin.Context) {
 	})
 }
 
+//ReverseProxyJob ...
+func ReverseProxyJob(c *gin.Context) {
+	apigolib.Trace()
+	currentRoute, j, t, err := params(c)
+	if err != nil {
+		return
+	}
+	//TODO: complete reverse proxy request
+	fmt.Printf("%s %s", j, t)
+	c.JSON(200, gin.H{
+		"msg": fmt.Sprintf("%s", currentRoute),
+	})
+}
+
 func params(c *gin.Context) (string, apigohelpers.JSONCmd, string, error) {
 	buf, _ := c.Get("id")
 	id := buf.(int)

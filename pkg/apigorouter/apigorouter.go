@@ -112,6 +112,8 @@ func Get(pathConfig string) (*gin.Engine, error) {
 			default:
 				log.Printf("Unknown method or invalid method for route '%s'", routeName)
 			}
+		case "reverseproxy":
+			
 		default:
 			log.Printf("Unknown job type for route '%s'", routeName)
 		}
